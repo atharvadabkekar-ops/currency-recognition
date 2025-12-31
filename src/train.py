@@ -18,18 +18,39 @@ def train_model(train_loader, val_loader):
 
     # ===== Model =====
     model = build_model().to(DEVICE)
+    # =====Freeze====
+    for param in model.parameters():
+    param.requires_grad = False
+
+    for param in model.fc.parameters():
+        param.requires_grad = True
 
     # ===== Loss & Optimizer =====
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)
     optimizer = Adam(model.fc.parameters(), lr=LEARNING_RATE)
 
     # ===== AMP Scaler =====
     scaler = GradScaler()
 
     best_val_acc = 0.0
-
+    #========Training Loop=========
     for epoch in range(EPOCHS):
         print(f"\nEpoch [{epoch+1}/{EPOCHS}]")
+        if epoch == 5:
+            print("[INFO] Unfreezing layer4 for fine-tuning")
+        
+            for param in model.layer4.parameters():
+                param.requires_grad = True
+        
+            optimizer = Adam(
+                filter(lambda p: p.requires_grad, model.parameters()),
+                lr=LEARNING_RATE * 0.1,   # 🔥 important
+                weight_decay=WEIGHT_DECAY
+            )
+            trainable = sum(p.requires_grad for p in model.parameters())
+            total = sum(1 for _ in model.parameters())
+            print(f"[DEBUG] Trainable params: {trainable}/{total}")
+
 
         # ================= TRAIN =================
         model.train()
