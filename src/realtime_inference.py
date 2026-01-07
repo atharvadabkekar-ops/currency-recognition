@@ -48,10 +48,10 @@ while True:
         conf = conf.item()
         pred = pred.item()
 
-if conf < 0.70:
-    label = "Unknown"
-else:
-    label = f"Rs.{CLASSES[pred]}"
+    if conf < 0.70:
+        label = "Unknown"
+    else:
+        label = f"Rs.{CLASSES[pred]}"
 
     print(outputs)
     # Display
@@ -68,7 +68,7 @@ else:
     cv2.imshow("Indian Currency Recognition", frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+       break
 
 cap.release()
 cv2.destroyAllWindows()

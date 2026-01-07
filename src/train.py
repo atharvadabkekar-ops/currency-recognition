@@ -9,6 +9,7 @@ from src.config import (
     EPOCHS,
     LEARNING_RATE,
     CHECKPOINT_DIR,
+    WEIGHT_DECAY,
 )
 from src.model import build_model
 
@@ -20,7 +21,7 @@ def train_model(train_loader, val_loader):
     model = build_model().to(DEVICE)
     # =====Freeze====
     for param in model.parameters():
-    param.requires_grad = False
+        param.requires_grad = False
 
     for param in model.fc.parameters():
         param.requires_grad = True
