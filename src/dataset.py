@@ -1,7 +1,7 @@
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
-from src.config import TRAIN_DIR, VAL_DIR, BATCH_SIZE, NUM_WORKERS
+from src.config import TRAIN_DIR, VAL_DIR, BATCH_SIZE, NUM_WORKERS, IMAGE_SIZE
 
 train_transform = transforms.Compose([
     transforms.RandomResizedCrop(

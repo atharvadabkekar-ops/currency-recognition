@@ -11,7 +11,7 @@ def build_model():
 
     # Replace classifier layer
     in_features = model.fc.in_features
-model.fc = nn.Sequential(
+    model.fc = nn.Sequential(
     nn.Dropout(0.3),
     nn.Linear(in_features, NUM_CLASSES)
 )

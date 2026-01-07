@@ -37,7 +37,7 @@ BATCH_SIZE      = 64
 # ==========================
 # 📚 TRAINING SETTINGS
 # ==========================
-EPOCHS          = 10
+EPOCHS          = 40
 LEARNING_RATE   = 1e-4
 WEIGHT_DECAY    = 1e-5
 NUM_WORKERS     = 8     # for dataloaders, adjust based on CPU cores
