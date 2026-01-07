@@ -48,12 +48,12 @@ while True:
         conf = conf.item()
         pred = pred.item()
 
-    if conf < 0.70:
+    if conf < 0.40:
         label = "Unknown"
     else:
         label = f"Rs.{CLASSES[pred]}"
 
-    print(outputs)
+    print(probs)
     # Display
     cv2.putText(
         frame,
