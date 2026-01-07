@@ -22,7 +22,7 @@ transform = transforms.Compose([
 ])
 
 # ===== Phone camera stream =====
-CAMERA_URL = "http://192.168.1.11:8080/video"  
+CAMERA_URL = "http://100.114.194.163:8080/video"  
 cap = cv2.VideoCapture(CAMERA_URL)
 
 assert cap.isOpened(), "❌ Cannot open camera stream"
